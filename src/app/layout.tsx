@@ -1,8 +1,9 @@
-import getMetadata from '@/lib/meta';
+import { getMetadata } from '@/lib/meta';
 import { poppins } from '@/lib/fonts';
 import './globals.css';
 
 import { cn } from '@/lib/utils';
+import Navbar from '@/components/navbar';
 
 export const metadata = getMetadata({
   title: 'Find the best products with the best price',
@@ -15,7 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(poppins.className)}>{children}</body>
+      <body className={cn(poppins.className)}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
