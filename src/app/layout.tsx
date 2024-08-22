@@ -2,6 +2,8 @@ import getMetadata from '@/lib/meta';
 import { poppins } from '@/lib/fonts';
 import './globals.css';
 
+import { cn } from '@/lib/utils';
+
 export const metadata = getMetadata({
   title: 'Find the best products with the best price',
 });
@@ -12,8 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={poppins.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn(poppins.className)}>{children}</body>
     </html>
   );
 }
