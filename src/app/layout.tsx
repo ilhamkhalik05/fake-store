@@ -1,9 +1,9 @@
+import Navbar from '@/components/navbar';
+
 import { getMetadata } from '@/lib/meta';
 import { poppins } from '@/lib/fonts';
-import './globals.css';
-
 import { cn } from '@/lib/utils';
-import Navbar from '@/components/navbar';
+import './globals.css';
 
 export const metadata = getMetadata({
   title: 'Find the best products with the best price',

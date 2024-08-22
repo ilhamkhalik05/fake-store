@@ -1,10 +1,10 @@
-import { HeartIcon, HouseIcon, UserCircleIcon } from "lucide-react";
-import { Button } from "../ui/button";
-import Link from "next/link";
+import { HeartIcon, HouseIcon, UserCircleIcon } from 'lucide-react';
+import { Button } from '../ui/button';
+import Link from 'next/link';
 
-export const Menu = () => {
+export const Menu = ({ className }: { className: string }) => {
   return (
-    <div className="flex items-center">
+    <div className={className}>
       <Button
         variant={'ghost'}
         size={'sm'}
