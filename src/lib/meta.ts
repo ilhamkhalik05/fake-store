@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-const getMetadata = ({ title }: Metadata) => {
+export const getMetadata = ({ title }: Metadata) => {
   const prefixTitle = 'Fake Store';
 
   const metadata = {
@@ -10,5 +10,3 @@ const getMetadata = ({ title }: Metadata) => {
 
   return metadata;
 };
-
-export default getMetadata;
