@@ -3,7 +3,7 @@ import { Diamond, Gamepad2, Refrigerator, Shirt } from 'lucide-react';
 
 export default function Category() {
   return (
-    <div className="flex flex-row justify-center gap-3 overflow-x-auto w-full mx-3">
+    <div className="flex flex-row gap-3 overflow-x-auto w-full">
       <Badge
         variant={'outline'}
         className="flex items-center gap-2 p-2 hover:bg-gray-100"
