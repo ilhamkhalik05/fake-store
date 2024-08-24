@@ -1,7 +1,7 @@
 export const TextHeader = () => {
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-3xl font-semibold">
+      <h1 className="text-3xl font-semibold tracking-tight">
         Find the best products with the best price!
       </h1>
       <p className="text-sm text-gray-600 leading-tight">
