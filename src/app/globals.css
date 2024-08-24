@@ -62,7 +62,7 @@
 @layer base {
   * {
     @apply border-border;
-    scrollbar-width: 0px;
+    scrollbar-width: none;
   }
   body {
     @apply bg-background text-foreground overflow-x-hidden;

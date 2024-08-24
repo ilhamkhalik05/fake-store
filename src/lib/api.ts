@@ -6,7 +6,7 @@ export const getProducts = async (
   params?: string,
 ): Promise<Product[] | null> => {
   try {
-    const res = await fetch(`${API_BASE_URL}/products?${params}`);
+    const res = await fetch(`${API_BASE_URL}/products${params}`);
     const data = await res.json();
     return data;
   } catch (error) {
