@@ -6,7 +6,7 @@ export default function PromoCard() {
   return (
     <Card>
       <Image
-        className="w-96 object-contain rounded-sm"
+        className="w-full md:w-96 object-cover rounded-sm"
         src={salePromo}
         alt="sale"
       />

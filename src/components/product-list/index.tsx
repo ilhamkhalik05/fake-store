@@ -1,22 +1,29 @@
 import type { Product } from '@/lib/type';
-import { getProducts } from '@/lib/api';
-import { Card, CardContent, CardTitle } from '../ui/card';
+
 import { StarIcon, TagIcon } from 'lucide-react';
+import { Card, CardContent, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
+import Link from 'next/link';
 
-export default async function TopProductsList() {
-  const products = await getProducts("?limit=5&sort=desc");
-
+export default async function ProductList({
+  products,
+}: {
+  products: Product[] | null;
+}) {
   return (
-    <div className="grid grid-cols-5 gap-3 w-full">
+    <div className={`flex flex-row items-center gap-3 overflow-x-auto w-full`}>
       {!!products?.length &&
         products.map((product: Product) => (
           // Card Wrapper
-          <div className="cursor-pointer flex flex-col opacity-75 hover:opacity-100 transition-opacity duration-200">
+          <Link
+            className="cursor-pointer flex flex-col w-[200px] opacity-75 hover:opacity-100 transition-opacity duration-200"
+            key={product.id}
+            href={'/'}
+          >
             {/* Card Image */}
-            <Card key={product.id} className="p-3">
+            <Card className="p-3">
               <img
-                className="h-32 object-contain m-auto"
+                className="h-32 object-fit m-auto"
                 src={product.image}
                 alt={product.title}
               />
@@ -48,7 +55,7 @@ export default async function TopProductsList() {
                 </div>
               </div>
             </CardContent>
-          </div>
+          </Link>
         ))}
     </div>
   );

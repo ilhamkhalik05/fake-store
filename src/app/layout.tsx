@@ -1,5 +1,3 @@
-import Navbar from '@/components/navbar';
-
 import { getMetadata } from '@/lib/meta';
 import { poppins } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
@@ -16,10 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(poppins.className)}>
-        <Navbar />
-        {children}
-      </body>
+      <body className={cn(poppins.className)}>{children}</body>
     </html>
   );
 }
