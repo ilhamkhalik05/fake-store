@@ -4,6 +4,7 @@ import Navbar from '@/components/navbar';
 import Banner from '@/components/banner';
 import ProductList from '@/components/product-list';
 import PromoCard from '@/components/promo-card';
+import Footer from '@/components/footer';
 import { Card } from '@/components/ui/card';
 
 export default async function Home() {
@@ -66,6 +67,8 @@ export default async function Home() {
           <ProductList products={electronicProducts} />
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }
