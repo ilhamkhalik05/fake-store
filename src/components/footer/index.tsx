@@ -13,7 +13,7 @@ export default function Footer() {
         <DownloadApp />
       </div>
 
-      <footer className="p-5 bg-foreground text-white mt-6">
+      <footer className="p-5 bg-foreground text-white">
         All rights reserved &copy; 2024 - Ilham Khalik
       </footer>
     </>
