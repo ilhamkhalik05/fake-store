@@ -1,9 +1,12 @@
 import type { Product } from '@/lib/type';
 
-import { StarIcon, TagIcon } from 'lucide-react';
-import { Card, CardContent, CardTitle } from '../ui/card';
-import { Badge } from '../ui/badge';
 import Link from 'next/link';
+import { Card, CardContent } from '../ui/card';
+import { ProductRate } from './Rate';
+import { ProductPrice } from './Price';
+import { ProductTitle } from './Title';
+import { renderCategory } from '../category';
+import { ProductImage } from './Image';
 
 export default async function ProductList({
   products,
@@ -18,41 +21,25 @@ export default async function ProductList({
           <Link
             className="cursor-pointer flex flex-col w-[200px] opacity-75 hover:opacity-100 transition-opacity duration-200"
             key={product.id}
-            href={'/'}
+            href={'/product/' + product.id}
           >
             {/* Card Image */}
             <Card className="p-3">
-              <img
+              <ProductImage
                 className="h-32 object-fit m-auto"
-                src={product.image}
-                alt={product.title}
+                productImage={product.image}
               />
             </Card>
 
             {/* Card Items */}
             <CardContent className="p-2">
-              <Badge
-                variant={'outline'}
-                className="flex items-center gap-1 mb-1 max-w-fit py-1"
-              >
-                <TagIcon size={16} />
-                <h1 className="text-xs font-medium">{product.category}</h1>
-              </Badge>
+              {renderCategory(product.category)}
 
-              <CardTitle className="text-sm text-muted-foreground font-medium line-clamp-2">
-                {product.title}
-              </CardTitle>
+              <ProductTitle productTitle={product.title} />
 
               <div className="flex justify-between mt-1">
-                <CardTitle className="text-sm text-foreground font-semibold line-clamp-1">
-                  ${product.price}
-                </CardTitle>
-                <div className="flex items-center gap-1.5">
-                  <StarIcon size={15} color="orange" />
-                  <CardTitle className="text-xs text-muted-foreground font-light line-clamp-1">
-                    {product.rating.rate}/5
-                  </CardTitle>
-                </div>
+                <ProductPrice productPrice={product.price} />
+                <ProductRate productRate={product.rating.rate} />
               </div>
             </CardContent>
           </Link>
