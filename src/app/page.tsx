@@ -5,6 +5,7 @@ import Banner from '@/components/banner';
 import ProductList from '@/components/product-list';
 import PromoCard from '@/components/promo-card';
 import Footer from '@/components/footer';
+import Container from '@/components/container';
 import { Card } from '@/components/ui/card';
 
 export default async function Home() {
@@ -16,8 +17,8 @@ export default async function Home() {
     jeweleryProducts,
   ] = await Promise.all([
     getAllProducts({ limit: 5 }),
-    getProductsByCategory({ category: 'women' }),
-    getProductsByCategory({ category: 'men' }),
+    getProductsByCategory({ category: "women's clothing" }),
+    getProductsByCategory({ category: "men's clothing" }),
     getProductsByCategory({ category: 'electronics' }),
     getProductsByCategory({ category: 'jewelery' }),
   ]);
@@ -26,7 +27,7 @@ export default async function Home() {
     <>
       <Navbar />
 
-      <div className="flex flex-col p-5">
+      <Container>
         <Banner />
 
         {/* Sale Promo */}
@@ -66,7 +67,7 @@ export default async function Home() {
           </h1>
           <ProductList products={electronicProducts} />
         </div>
-      </div>
+      </Container>
 
       <Footer />
     </>
