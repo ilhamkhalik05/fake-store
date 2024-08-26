@@ -2,13 +2,13 @@ import type { Product } from '@/lib/type';
 import { API_BASE_URL } from '@/lib/api';
 
 const categories = {
-  electronics: 'electronics',
-  jewelery: 'jewelery',
-  men: "men's%20clothing",
-  women: "women's%20clothing",
+  "electronics": 'electronics',
+  "jewelery": 'jewelery',
+  "men's clothing": "men's%20clothing",
+  "women's clothing": "women's%20clothing",
 } as const;
 
-type Category = keyof typeof categories;
+export type Category = keyof typeof categories;
 
 export const getProductsByCategory = async ({
   category,
@@ -16,13 +16,8 @@ export const getProductsByCategory = async ({
   category: Category;
 }): Promise<Product[] | null> => {
   try {
-    const categoryValue = categories[category];
-
-    const res = await fetch(
-      `${API_BASE_URL}/products/category/${categoryValue}`,
-    );
+    const res = await fetch(`${API_BASE_URL}/products/category/${category}`);
     const data = await res.json();
-
     return data;
   } catch (error) {
     console.error(error);
