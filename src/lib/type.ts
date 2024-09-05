@@ -11,6 +11,13 @@ export const SignInSchema = z.object({
 });
 
 export type TSignInSchema = z.infer<typeof SignInSchema>;
+export type TAuthStatus = 'authenticated' | 'unauthenticated';
+
+export type UserSession = {
+  username: string;
+  token: string;
+};
+
 export type Product = {
   id: number;
   title: string;

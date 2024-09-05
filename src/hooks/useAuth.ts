@@ -1,24 +1,24 @@
-import type { TSignInSchema } from '@/lib/type';
+import type { TAuthStatus, TSignInSchema, UserSession } from '@/lib/type';
 import { API_BASE_URL } from '@/lib/api';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { getUserToken, setUserToken } from '@/lib/utils';
+import { getSession, setSession } from '@/lib/utils';
 
 export const useAuth = () => {
-  const userToken = getUserToken();
-  const isLogin = userToken ? true : false;
+  const session = getSession();
+  const status: TAuthStatus = session ? 'authenticated' : 'unauthenticated';
 
   const pathname = usePathname();
   const { push } = useRouter();
 
   useEffect(() => {
-    if (userToken && pathname === '/auth') {
+    if (session && pathname === '/auth') {
       push('/');
     }
-  }, [userToken]);
+  }, [session]);
 
-  const signInOnSuccess = (token: string) => {
-    setUserToken(token);
+  const signInOnSuccess = (userSession: UserSession) => {
+    setSession(userSession);
     push('/');
   };
 
@@ -32,9 +32,11 @@ export const useAuth = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => signInOnSuccess(data.token))
+      .then((data) =>
+        signInOnSuccess({ username: userData.username, token: data.token }),
+      )
       .catch((err) => console.log(err));
   };
 
-  return { userToken, isLogin, signInAction };
+  return { session, status, signInAction };
 };
