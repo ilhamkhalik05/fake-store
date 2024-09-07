@@ -1,5 +1,5 @@
 import { renderCategory } from '@/components/category';
-import { getSingleProducts } from '@/services';
+import { getSingleProducts, getRelatedProducts } from '@/services/product';
 
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
@@ -7,11 +7,10 @@ import Container from '@/components/container';
 import Link from 'next/link';
 import { ProductRate } from '@/components/product-list/Rate';
 import { ProductTitle } from '@/components/product-list/Title';
-import { Button } from '@/components/ui/button';
-import { ShoppingCartIcon } from 'lucide-react';
+import { Button } from '@/components/@shadcn-ui/button';
 import { ProductImage } from '@/components/product-list/Image';
 import { ProductDescription } from '@/components/product-list/Description';
-import { getRelatedProducts } from '@/services/getRelatedProducts';
+import { AddToCartButton } from '@/components/utils';
 
 export default async function ProductPage({
   params,
@@ -59,10 +58,7 @@ export default async function ProductPage({
             {/* Action Button Group */}
             <div className="grid grid-cols-2 gap-2 mt-3">
               <Button variant={'default'}>Buy Now</Button>
-              <Button variant={'outline'} className="flex items-center gap-2.5">
-                <ShoppingCartIcon size={18} />
-                Add to Cart
-              </Button>
+              <AddToCartButton />
             </div>
           </main>
 

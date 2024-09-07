@@ -1,4 +1,4 @@
-import { getAllProducts, getProductsByCategory } from '@/services';
+import { getAllProducts, getProductsByCategory } from '@/services/product';
 
 import Navbar from '@/components/navbar';
 import Banner from '@/components/banner';
@@ -6,7 +6,7 @@ import ProductList from '@/components/product-list';
 import PromoCard from '@/components/promo-card';
 import Footer from '@/components/footer';
 import Container from '@/components/container';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/@shadcn-ui/card';
 
 export default async function Home() {
   const [
