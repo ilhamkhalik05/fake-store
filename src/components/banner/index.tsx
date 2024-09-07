@@ -1,8 +1,7 @@
-import Link from 'next/link';
 import Category from '../category';
-import { Button } from '../ui/button';
 import { BannerImage } from './BannerImage';
 import { TextHeader } from './TextHeader';
+import { BannerLinks } from './BannerLinks';
 
 export default function Banner() {
   return (
@@ -14,19 +13,7 @@ export default function Banner() {
           <hr className="border border-black my-6" />
 
           <Category />
-
-          <div className="flex items-center gap-3 mt-4">
-            <Button className="w-full md:w-auto" variant={'outline'}>
-              See our products
-            </Button>
-
-            <Link href={'/auth'}>
-              <Button className="w-full md:w-auto" variant={'default'}>
-                Join with us
-              </Button>
-            </Link>
-          </div>
-          
+          <BannerLinks />
         </div>
         <div className="w-full md:w-1/2">
           <BannerImage />
