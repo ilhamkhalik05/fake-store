@@ -1,7 +1,7 @@
 import type { Product } from '@/lib/type';
 
 import Link from 'next/link';
-import { Card, CardContent } from '../ui/card';
+import { Card, CardContent } from '../@shadcn-ui/card';
 import { ProductRate } from './Rate';
 import { ProductPrice } from './Price';
 import { ProductTitle } from './Title';

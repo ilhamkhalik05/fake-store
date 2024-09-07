@@ -1,4 +1,4 @@
-import { Card } from '../ui/card';
+import { Card } from '../@shadcn-ui/card';
 import Image from 'next/image';
 import salePromo from '@public/sale-promo.jpg';
 

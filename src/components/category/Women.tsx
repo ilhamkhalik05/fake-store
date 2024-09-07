@@ -1,5 +1,5 @@
 import { Shirt } from 'lucide-react';
-import { Badge } from '../ui/badge';
+import { Badge } from '../@shadcn-ui/badge';
 
 export const WomenCategory = () => {
   return (

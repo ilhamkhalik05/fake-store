@@ -1,5 +1,5 @@
-import { Diamond } from "lucide-react";
-import { Badge } from "../ui/badge";
+import { Diamond } from 'lucide-react';
+import { Badge } from '../@shadcn-ui/badge';
 
 export const JeweleryCategory = () => {
   return (

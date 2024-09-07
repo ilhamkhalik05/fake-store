@@ -11,11 +11,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form';
-import { Input } from '../ui/input';
+} from '../@shadcn-ui/form';
+import { Input } from '../@shadcn-ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '../ui/button';
-import { Checkbox } from '../ui/checkbox';
+import { Button } from '../@shadcn-ui/button';
+import { Checkbox } from '../@shadcn-ui/checkbox';
 
 export const SignInForm = () => {
   const { signInAction } = useAuth();
