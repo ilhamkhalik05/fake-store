@@ -1,15 +1,17 @@
+'use client';
+
 import type { TAuthStatus, TSignInSchema, UserSession } from '@/lib/type';
 import { API_BASE_URL } from '@/lib/api';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { getSession, setSession } from '@/lib/utils';
+import { getSession, setSession } from '@/lib/auth';
 
 export const useAuth = () => {
-  const session = getSession();
-  const status: TAuthStatus = session ? 'authenticated' : 'unauthenticated';
-
   const pathname = usePathname();
   const { push } = useRouter();
+
+  const session: UserSession = getSession();
+  const status: TAuthStatus = session ? 'authenticated' : 'unauthenticated';
 
   useEffect(() => {
     if (session && pathname === '/auth') {
