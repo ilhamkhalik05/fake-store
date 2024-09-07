@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import logo from "@public/brand-logo.png"
+import { Avatar, AvatarFallback, AvatarImage } from '../@shadcn-ui/avatar';
+import logo from '@public/brand-logo.png';
 
 export const Brand = () => {
   return (

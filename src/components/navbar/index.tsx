@@ -1,14 +1,12 @@
 import { Addons } from './Addons';
 import { Brand } from './Brand';
-import { Menu } from './Menu';
+import { NavMenu } from './NavMenu';
 
 export default function Navbar() {
   return (
     <nav className="py-5 px-8 flex justify-between items-center">
       <Brand />
-      <div className="hidden lg:block">
-        <Menu className="flex flex-row items-center" />
-      </div>
+      <NavMenu />
       <Addons />
     </nav>
   );
