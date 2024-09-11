@@ -1,44 +1,23 @@
-'use client';
-
-import type { TAuthStatus, TSignInSchema, UserSession } from '@/lib/type';
-import { API_BASE_URL } from '@/lib/api';
-import { usePathname, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { getSession, setSession } from '@/lib/auth';
+import type { TSignInSchema } from '@/lib/type';
+import { useState } from 'react';
+import { signIn } from 'next-auth/react';
 
 export const useAuth = () => {
-  const pathname = usePathname();
-  const { push } = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
-  const session: UserSession = getSession();
-  const status: TAuthStatus = session ? 'authenticated' : 'unauthenticated';
+  function togglePassword() {
+    setShowPassword((prevState) => !prevState);
+  }
 
-  useEffect(() => {
-    if (session && pathname === '/auth') {
-      push('/');
-    }
-  }, [session]);
+  async function handleAuth(userInput: TSignInSchema) {
+    const res = await signIn('credentials', {
+      redirect: false,
+      username: userInput.username,
+      password: userInput.password,
+    });
 
-  const signInOnSuccess = (userSession: UserSession) => {
-    setSession(userSession);
-    push('/');
-  };
+    return res;
+  }
 
-  const signInAction = async (userData: TSignInSchema) => {
-    await fetch(`${API_BASE_URL}/auth/login`, {
-      method: 'POST',
-      body: JSON.stringify(userData),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) =>
-        signInOnSuccess({ username: userData.username, token: data.token }),
-      )
-      .catch((err) => console.log(err));
-  };
-
-  return { session, status, signInAction };
+  return { showPassword, togglePassword, handleAuth };
 };

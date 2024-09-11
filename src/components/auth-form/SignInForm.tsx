@@ -1,7 +1,6 @@
 'use client';
 
 import { SignInSchema, type TSignInSchema } from '@/lib/type';
-import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import {
@@ -16,17 +15,34 @@ import { Input } from '../@shadcn-ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '../@shadcn-ui/button';
 import { Checkbox } from '../@shadcn-ui/checkbox';
+import { showNotification } from '@/lib/notyf';
+import { useRouter } from 'next/navigation';
 
 export const SignInForm = () => {
-  const { signInAction } = useAuth();
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const { showPassword, togglePassword, handleAuth } = useAuth();
+  const router = useRouter();
 
   const form = useForm<TSignInSchema>({
     resolver: zodResolver(SignInSchema),
   });
 
-  const onSubmit: SubmitHandler<TSignInSchema> = async (userData) =>
-    signInAction(userData);
+  const onSubmit: SubmitHandler<TSignInSchema> = async (userInput) => {
+    const res = await handleAuth(userInput);
+
+    if (res?.ok) {
+      showNotification({
+        type: 'success',
+        message: "You're now authorize, go get your products 🎉",
+      });
+
+      router.push('/');
+    } else {
+      showNotification({
+        type: 'error',
+        message: 'Opss, please input the correct data 😩',
+      });
+    }
+  };
 
   return (
     <Form {...form}>
@@ -81,10 +97,7 @@ export const SignInForm = () => {
           )}
         />
 
-        <Checkbox
-          id="showPassword"
-          onClick={() => setShowPassword(!showPassword)}
-        />
+        <Checkbox id="showPassword" onClick={togglePassword} />
         <label
           htmlFor="showPassword"
           className="cursor-pointer ml-3 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"

@@ -64,3 +64,8 @@ export type Cart = {
   date: string;
   products: ProductInCart[];
 };
+
+export type TShowNotyf = {
+  type: 'success' | 'error';
+  message: string;
+};
