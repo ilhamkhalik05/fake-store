@@ -1,0 +1,55 @@
+import { Card } from '../@shadcn-ui/card';
+import { Checkbox } from '../@shadcn-ui/checkbox';
+import { ProductImage } from '../product-list/Image';
+import { ProductTitle } from '../product-list/Title';
+import { ProductPrice } from '../product-list/Price';
+import { Heart } from 'lucide-react';
+import { Product } from '@/lib/type';
+import { ProductsCartHeader } from './ProductsCartHeader';
+import { ProductsCartQuantity } from './ProductsCartQuantity';
+
+export default function ProductsCartList({
+  productsInCart,
+}: {
+  productsInCart: Product[];
+}) {
+  return (
+    <>
+      <ProductsCartHeader />
+
+      <div className="flex flex-col gap-4 w-full">
+        {productsInCart?.map((product) => (
+          <Card
+            key={product.id}
+            className="cursor-pointer relative ps-10 pe-6 py-4 rounded-2xl"
+          >
+            <Checkbox className="absolute top-3.5 left-3.5" />
+
+            <div className="flex items-start gap-5 w-full">
+              <ProductImage
+                productImage={product.image}
+                className="size-20 object-contain"
+              />
+              <div className="flex flex-col justify-between gap-2 size-full">
+                <div className="flex flex-col">
+                  <ProductTitle
+                    className="line-clamp-2 text-black"
+                    productTitle={product.title}
+                  />
+                  <ProductPrice
+                    productPrice={product.price}
+                    className="text-muted-foreground text-md"
+                  />
+                </div>
+                <div className="flex items-center justify-between w-full">
+                  <Heart size={20} />
+                  <ProductsCartQuantity />
+                </div>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </>
+  );
+}

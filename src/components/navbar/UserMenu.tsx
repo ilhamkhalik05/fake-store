@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { LogOut, User } from 'lucide-react';
 import { Button } from '../@shadcn-ui/button';
 import { signOut } from 'next-auth/react';
@@ -7,6 +8,8 @@ import { showNotification } from '@/lib/notyf';
 import Link from 'next/link';
 
 export const UserMenu = () => {
+  const router = useRouter();
+
   const handleOnLogout = () => {
     signOut({
       redirect: false,
@@ -16,6 +19,7 @@ export const UserMenu = () => {
       message:
         'Oops, you signed out! We miss you already. Please sign in again to continue where you left off. 😊',
     });
+    router.push('/');
   };
 
   return (
