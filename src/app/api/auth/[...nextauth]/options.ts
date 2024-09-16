@@ -3,6 +3,10 @@ import { getUserByUsername } from '@/services/user';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 export const authOptions: AuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET!,
+  pages: {
+    signIn: '/auth',
+  },
   providers: [
     CredentialsProvider({
       credentials: {
@@ -23,19 +27,35 @@ export const authOptions: AuthOptions = {
         if (credentials.password !== user.password) {
           return null;
         } else {
-          const authorizedUser = {
-            id: user.id.toString(),
+          return {
+            id: user.id,
             name: user.username,
             email: user.email,
           };
-
-          return authorizedUser;
         }
       },
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
-  pages: {
-    signIn: '/auth',
+  callbacks: {
+    // Add custom fields to the JWT token
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id as number; // Add user id to the token
+        token.name = user.name; // Add user name to the token
+        token.email = user.email; // Add user email to the token
+      }
+      return token;
+    },
+
+    // Populate the session with custom fields from the token
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id as number; // Make sure id is typed as number
+        session.user.name = token.name; // Pass name from token
+        session.user.email = token.email; // Pass email from token
+      }
+
+      return session; // Return the session object
+    },
   },
 };

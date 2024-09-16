@@ -1,22 +1,25 @@
-import type { Cart, Product } from '@/lib/type';
+import type { Cart, ProductWithQuantity } from '@/lib/type';
 import { getUserCart } from './getUserCart';
 import { getProductsById } from '../product';
 
-export const getProductInCart = async (
+export const getProductsInCart = async (
   userId: number,
-): Promise<Product[] | null> => {
+): Promise<ProductWithQuantity[] | null> => {
   try {
     const userCart = await getUserCart(userId);
     const { products } = userCart as Cart;
 
-    const productsInCart = await Promise.all(
+    const productsWithQuantity = await Promise.all(
       products.map(async (product) => {
         const singleProductInCart = await getProductsById(product.productId);
-        return singleProductInCart as Product;
+        return {
+          ...singleProductInCart,
+          quantity: product.quantity,
+        } as ProductWithQuantity;
       }),
     );
 
-    return productsInCart;
+    return productsWithQuantity;
   } catch (error) {
     console.error(error);
     return null;

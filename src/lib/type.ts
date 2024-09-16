@@ -31,6 +31,20 @@ export type Product = {
   };
 };
 
+export type ProductWithQuantity = {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+  quantity: number;
+};
+
 export type User = {
   id: number;
   email: string;
@@ -68,4 +82,10 @@ export type Cart = {
 export type TShowNotyf = {
   type: 'success' | 'error';
   message: string;
+};
+
+export type CartSummary = {
+  id: number;
+  products: ProductWithQuantity[];
+  totalPrice: number;
 };

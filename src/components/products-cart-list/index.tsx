@@ -1,24 +1,24 @@
+'use client';
+
 import { Card } from '../@shadcn-ui/card';
 import { Checkbox } from '../@shadcn-ui/checkbox';
 import { ProductImage } from '../product-list/Image';
 import { ProductTitle } from '../product-list/Title';
 import { ProductPrice } from '../product-list/Price';
 import { Heart } from 'lucide-react';
-import { Product } from '@/lib/type';
 import { ProductsCartHeader } from './ProductsCartHeader';
 import { ProductsCartQuantity } from './ProductsCartQuantity';
+import { useCart } from '@/hooks/useCart';
 
-export default function ProductsCartList({
-  productsInCart,
-}: {
-  productsInCart: Product[];
-}) {
+export default function ProductsCartList({ userId }: { userId: number }) {
+  const { data: cartSummary } = useCart(userId);
+
   return (
     <>
       <ProductsCartHeader />
 
       <div className="flex flex-col gap-4 w-full">
-        {productsInCart?.map((product) => (
+        {cartSummary?.products?.map((product) => (
           <Card
             key={product.id}
             className="cursor-pointer relative ps-10 pe-6 py-4 rounded-2xl"
@@ -43,7 +43,7 @@ export default function ProductsCartList({
                 </div>
                 <div className="flex items-center justify-between w-full">
                   <Heart size={20} />
-                  <ProductsCartQuantity />
+                  <ProductsCartQuantity productQuantity={product.quantity} />
                 </div>
               </div>
             </div>

@@ -1,14 +1,14 @@
 'use client';
 
-import { useUserId } from '@/hooks/useUserId';
+import { useSession } from 'next-auth/react';
 import { ShoppingCartIcon } from 'lucide-react';
 import { Button } from '../@shadcn-ui/button';
 import Link from 'next/link';
 
 export const NavigateToCartButton = () => {
-  const userId = useUserId();
+  const { data: session } = useSession();
   return (
-    <Link href={`/cart/${userId}`}>
+    <Link href={`/cart/${session?.user.id}`}>
       <Button variant={'outline'} size={'icon'} className="rounded-lg">
         <ShoppingCartIcon size={18} />
       </Button>
