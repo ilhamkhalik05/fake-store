@@ -13,11 +13,13 @@ export const SignInSchema = z.object({
 export type TSignInSchema = z.infer<typeof SignInSchema>;
 export type TAuthStatus = 'authenticated' | 'unauthenticated';
 
+// User Session
 export type UserSession = {
   username: string;
   token: string;
 };
 
+// Bussiness Services Requirement
 export type Product = {
   id: number;
   title: string;
@@ -31,20 +33,31 @@ export type Product = {
   };
 };
 
-export type ProductWithQuantity = {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
+export interface ProductsInCart extends Product {
+  quantity: number;
+  status: 'rest' | 'select' | 'checkout';
+}
+
+export type ResponseProductsInCart = {
+  productId: number;
   quantity: number;
 };
 
+export type ResponseCart = {
+  id: number;
+  userId: number;
+  date: string;
+  products: ResponseProductsInCart[];
+};
+
+export type CartSummary = {
+  id: number;
+  products: ProductsInCart[];
+  totalPrice: number;
+};
+// Bussiness Services Requirement
+
+// User Details
 export type User = {
   id: number;
   email: string;
@@ -67,25 +80,8 @@ export type User = {
   phone: string;
 };
 
-export type ProductInCart = {
-  productId: number;
-  quantity: number;
-};
-
-export type Cart = {
-  id: number;
-  userId: number;
-  date: string;
-  products: ProductInCart[];
-};
-
+// Add Ons Utility
 export type TShowNotyf = {
   type: 'success' | 'error';
   message: string;
-};
-
-export type CartSummary = {
-  id: number;
-  products: ProductWithQuantity[];
-  totalPrice: number;
 };
