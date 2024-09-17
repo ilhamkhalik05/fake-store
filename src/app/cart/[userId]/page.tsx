@@ -16,7 +16,7 @@ export default function CartPage({ params }: { params: { userId: string } }) {
             <ProductsCartList userId={userId} />
           </div>
           <div className="col-span-6 sticky bottom-0 md:col-span-2">
-            <CartSummary />
+            <CartSummary userId={userId}/>
           </div>
         </div>
       </Container>
