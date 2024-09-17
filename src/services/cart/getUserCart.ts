@@ -1,7 +1,9 @@
 import { API_BASE_URL } from '@/lib/api';
-import { Cart } from '@/lib/type';
+import { ResponseCart } from '@/lib/type';
 
-export const getUserCart = async (userId: number): Promise<Cart | null> => {
+export const getUserCart = async (
+  userId: number,
+): Promise<ResponseCart | null> => {
   try {
     const res = await fetch(`${API_BASE_URL}/carts/user/${userId}`);
     const data = await res.json();
