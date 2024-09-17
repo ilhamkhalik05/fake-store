@@ -11,7 +11,7 @@ import { ProductsCartQuantity } from './ProductsCartQuantity';
 import { useCart } from '@/hooks/useCart';
 
 export default function ProductsCartList({ userId }: { userId: number }) {
-  const { data: cartSummary } = useCart(userId);
+  const { data: cartSummary, plusProductQuantity } = useCart(userId);
 
   return (
     <>
@@ -43,7 +43,10 @@ export default function ProductsCartList({ userId }: { userId: number }) {
                 </div>
                 <div className="flex items-center justify-between w-full">
                   <Heart size={20} />
-                  <ProductsCartQuantity productQuantity={product.quantity} />
+                  <ProductsCartQuantity
+                    productQuantity={product.quantity}
+                    plusProductQuantity={() => plusProductQuantity(product.id)}
+                  />
                 </div>
               </div>
             </div>
