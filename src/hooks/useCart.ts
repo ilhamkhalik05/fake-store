@@ -27,6 +27,27 @@ export const useCart = (userId: number) => {
     });
   }
 
+  function minusProductQuantity(productId: number) {
+    if (!productId) return;
+
+    // Minus product quantity by 1
+    const updatedProducts =
+      products?.map((product) => {
+        return product.id === productId && product.quantity > 1
+          ? { ...product, quantity: product.quantity - 1 }
+          : product;
+      }) || [];
+
+    // Set new state
+    setCartSummary((prevState) => {
+      if (!prevState) return prevState;
+      return {
+        ...prevState,
+        products: updatedProducts,
+      };
+    });
+  }
+
   useEffect(() => {
     async function initializeCartSummary() {
       if (!userId) return;
@@ -45,5 +66,5 @@ export const useCart = (userId: number) => {
     initializeCartSummary();
   }, []);
 
-  return { data: cartSummary, plusProductQuantity };
+  return { data: cartSummary, plusProductQuantity, minusProductQuantity };
 };

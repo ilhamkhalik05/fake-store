@@ -11,7 +11,7 @@ import { ProductsCartQuantity } from './ProductsCartQuantity';
 import { useCart } from '@/hooks/useCart';
 
 export default function ProductsCartList({ userId }: { userId: number }) {
-  const { data: cartSummary, plusProductQuantity } = useCart(userId);
+  const { data: cartSummary, plusProductQuantity, minusProductQuantity } = useCart(userId);
 
   return (
     <>
@@ -46,6 +46,7 @@ export default function ProductsCartList({ userId }: { userId: number }) {
                   <ProductsCartQuantity
                     productQuantity={product.quantity}
                     plusProductQuantity={() => plusProductQuantity(product.id)}
+                    minusProductQuantity={() => minusProductQuantity(product.id)}
                   />
                 </div>
               </div>
