@@ -1,10 +1,7 @@
-'use client';
-
 import Link from 'next/link';
 import { Button } from '../@shadcn-ui/button';
 import { Card } from '../@shadcn-ui/card';
 import { Checkbox } from '../@shadcn-ui/checkbox';
-import { useCart } from '@/hooks/useCart';
 
 export default function CartSummary({ totalPrice }: { totalPrice: number }) {
   return (

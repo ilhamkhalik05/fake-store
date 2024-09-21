@@ -7,6 +7,7 @@ import { Heart } from 'lucide-react';
 import { ProductsCartHeader } from './ProductsCartHeader';
 import { ProductsInCart } from '@/lib/type';
 import { ProductsCartQuantity } from './ProductsCartQuantity';
+import { useState } from 'react';
 
 type TProductsCartList = {
   products: ProductsInCart[];
@@ -14,6 +15,8 @@ type TProductsCartList = {
   minusProductQuantity: (productId: number) => void;
   selectProduct: (productId: number, productQuantity: number) => void;
   unSelectProduct: (productId: number) => void;
+  selectAllProduct: () => void;
+  unSelectAllProduct: () => void;
 };
 
 export default function ProductsCartList({
@@ -22,10 +25,18 @@ export default function ProductsCartList({
   minusProductQuantity,
   selectProduct,
   unSelectProduct,
+  selectAllProduct,
+  unSelectAllProduct,
 }: TProductsCartList) {
+  const [isSelectAll, setIsSelectAll] = useState(false);
   return (
     <>
-      <ProductsCartHeader />
+      <ProductsCartHeader
+        isSelectAll={isSelectAll}
+        setIsSelectAll={setIsSelectAll}
+        selectAllProduct={() => selectAllProduct()}
+        unSelectAllProduct={() => unSelectAllProduct()}
+      />
 
       <div className="flex flex-col gap-4 w-full">
         {products?.map((product) => {
@@ -37,6 +48,7 @@ export default function ProductsCartList({
             >
               <Checkbox
                 className="absolute top-3.5 left-3.5"
+                checked={isSelect || isSelectAll}
                 onClick={
                   isSelect
                     ? () => unSelectProduct(product.id)

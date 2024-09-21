@@ -15,7 +15,7 @@ export const getProductsInCart = async (
         return {
           ...singleProductInCart,
           quantity: 1,
-          status: 'rest',
+          status: 'REST',
         } as ProductsInCart;
       }),
     );

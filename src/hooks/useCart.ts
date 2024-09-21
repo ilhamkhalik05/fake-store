@@ -112,6 +112,41 @@ export function useCart(userId: number) {
     });
   };
 
+  const selectAllProduct = () => {
+    const updatedProducts = products?.map((product) => ({
+      ...product,
+      status: 'SELECT',
+    }));
+
+    // Set new state
+    setCartSummary((prevState) => {
+      if (!prevState) return prevState;
+      return {
+        ...prevState,
+        products: updatedProducts,
+        totalPrice: getTotalPrice(updatedProducts as ProductsInCart[]),
+      };
+    });
+  };
+
+  const unSelectAllProduct = () => {
+    const updatedProducts = products?.map((product) => ({
+      ...product,
+      status: 'REST',
+      quantity: 1,
+    }));
+
+    // Set new state
+    setCartSummary((prevState) => {
+      if (!prevState) return prevState;
+      return {
+        ...prevState,
+        products: updatedProducts,
+        totalPrice: getTotalPrice(updatedProducts as ProductsInCart[]),
+      };
+    });
+  };
+
   useEffect(() => {
     const initializeCartSummary = async () => {
       if (!userId) return;
@@ -137,5 +172,7 @@ export function useCart(userId: number) {
     minusProductQuantity,
     selectProduct,
     unSelectProduct,
+    selectAllProduct,
+    unSelectAllProduct,
   };
 }
