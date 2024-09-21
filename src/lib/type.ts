@@ -35,7 +35,7 @@ export type Product = {
 
 export interface ProductsInCart extends Product {
   quantity: number;
-  status: 'rest' | 'select' | 'checkout';
+  status: string;
 }
 
 export type ResponseProductsInCart = {

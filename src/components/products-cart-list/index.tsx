@@ -1,5 +1,3 @@
-'use client';
-
 import { Card } from '../@shadcn-ui/card';
 import { Checkbox } from '../@shadcn-ui/checkbox';
 import { ProductImage } from '../product-list/Image';
@@ -7,23 +5,36 @@ import { ProductTitle } from '../product-list/Title';
 import { ProductPrice } from '../product-list/Price';
 import { Heart } from 'lucide-react';
 import { ProductsCartHeader } from './ProductsCartHeader';
+import { ProductsInCart } from '@/lib/type';
 import { ProductsCartQuantity } from './ProductsCartQuantity';
-import { useCart } from '@/hooks/useCart';
 
-export default function ProductsCartList({ userId }: { userId: number }) {
-  const { data: cartSummary, plusProductQuantity, minusProductQuantity } = useCart(userId);
+type TProductsCartList = {
+  products: ProductsInCart[];
+  plusProductQuantity: (productId: number) => void;
+  minusProductQuantity: (productId: number) => void;
+  selectProduct: (productId: number, productQuantity: number) => void;
+};
 
+export default function ProductsCartList({
+  products,
+  plusProductQuantity,
+  minusProductQuantity,
+  selectProduct,
+}: TProductsCartList) {
   return (
     <>
       <ProductsCartHeader />
 
       <div className="flex flex-col gap-4 w-full">
-        {cartSummary?.products?.map((product) => (
+        {products?.map((product) => (
           <Card
             key={product.id}
             className="cursor-pointer relative ps-10 pe-6 py-4 rounded-2xl"
           >
-            <Checkbox className="absolute top-3.5 left-3.5" />
+            <Checkbox
+              className="absolute top-3.5 left-3.5"
+              onClick={() => selectProduct(product.id, product.quantity)}
+            />
 
             <div className="flex items-start gap-5 w-full">
               <ProductImage
@@ -46,7 +57,9 @@ export default function ProductsCartList({ userId }: { userId: number }) {
                   <ProductsCartQuantity
                     productQuantity={product.quantity}
                     plusProductQuantity={() => plusProductQuantity(product.id)}
-                    minusProductQuantity={() => minusProductQuantity(product.id)}
+                    minusProductQuantity={() =>
+                      minusProductQuantity(product.id)
+                    }
                   />
                 </div>
               </div>
