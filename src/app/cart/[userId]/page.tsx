@@ -16,6 +16,7 @@ export default function CartPage({ params }: { params: { userId: string } }) {
     plusProductQuantity,
     minusProductQuantity,
     selectProduct,
+    unSelectProduct,
   } = useCart(userId);
 
   return (
@@ -30,6 +31,7 @@ export default function CartPage({ params }: { params: { userId: string } }) {
               plusProductQuantity={plusProductQuantity}
               minusProductQuantity={minusProductQuantity}
               selectProduct={selectProduct}
+              unSelectProduct={unSelectProduct}
             />
           </div>
           <div className="col-span-6 sticky bottom-0 md:col-span-2">

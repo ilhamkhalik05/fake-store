@@ -67,11 +67,35 @@ export function useCart(userId: number) {
   const selectProduct = (productId: number, productQuantity: number) => {
     if (!productId && !productQuantity) return;
 
-    // Change product status to SELECT by productId
+    // Change status to SELECT
     const updatedProducts =
       products?.map((product) => {
         return product.id === productId
           ? { ...product, quantity: productQuantity, status: 'SELECT' }
+          : product;
+      }) || [];
+
+    // Set new state
+    setCartSummary((prevState) => {
+      if (!prevState) return prevState;
+      return {
+        ...prevState,
+        products: updatedProducts,
+        totalPrice: updatedProducts
+          ? getTotalPrice(updatedProducts as ProductsInCart[])
+          : prevState.totalPrice,
+      };
+    });
+  };
+
+  const unSelectProduct = (productId: number) => {
+    if (!productId) return;
+
+    // Change quantity to 1 and status to REST
+    const updatedProducts =
+      products?.map((product) => {
+        return product.id === productId
+          ? { ...product, quantity: 1, status: 'REST' }
           : product;
       }) || [];
 
@@ -112,5 +136,6 @@ export function useCart(userId: number) {
     plusProductQuantity,
     minusProductQuantity,
     selectProduct,
+    unSelectProduct,
   };
 }

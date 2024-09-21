@@ -13,6 +13,7 @@ type TProductsCartList = {
   plusProductQuantity: (productId: number) => void;
   minusProductQuantity: (productId: number) => void;
   selectProduct: (productId: number, productQuantity: number) => void;
+  unSelectProduct: (productId: number) => void;
 };
 
 export default function ProductsCartList({
@@ -20,52 +21,62 @@ export default function ProductsCartList({
   plusProductQuantity,
   minusProductQuantity,
   selectProduct,
+  unSelectProduct,
 }: TProductsCartList) {
   return (
     <>
       <ProductsCartHeader />
 
       <div className="flex flex-col gap-4 w-full">
-        {products?.map((product) => (
-          <Card
-            key={product.id}
-            className="cursor-pointer relative ps-10 pe-6 py-4 rounded-2xl"
-          >
-            <Checkbox
-              className="absolute top-3.5 left-3.5"
-              onClick={() => selectProduct(product.id, product.quantity)}
-            />
-
-            <div className="flex items-start gap-5 w-full">
-              <ProductImage
-                productImage={product.image}
-                className="size-20 object-contain"
+        {products?.map((product) => {
+          const isSelect = product.status === 'SELECT';
+          return (
+            <Card
+              key={product.id}
+              className="cursor-pointer relative ps-10 pe-6 py-4 rounded-2xl"
+            >
+              <Checkbox
+                className="absolute top-3.5 left-3.5"
+                onClick={
+                  isSelect
+                    ? () => unSelectProduct(product.id)
+                    : () => selectProduct(product.id, product.quantity)
+                }
               />
-              <div className="flex flex-col justify-between gap-2 size-full">
-                <div className="flex flex-col">
-                  <ProductTitle
-                    className="line-clamp-2 text-black"
-                    productTitle={product.title}
-                  />
-                  <ProductPrice
-                    productPrice={product.price}
-                    className="text-muted-foreground text-md"
-                  />
-                </div>
-                <div className="flex items-center justify-between w-full">
-                  <Heart size={20} />
-                  <ProductsCartQuantity
-                    productQuantity={product.quantity}
-                    plusProductQuantity={() => plusProductQuantity(product.id)}
-                    minusProductQuantity={() =>
-                      minusProductQuantity(product.id)
-                    }
-                  />
+
+              <div className="flex items-start gap-5 w-full">
+                <ProductImage
+                  productImage={product.image}
+                  className="size-20 object-contain"
+                />
+                <div className="flex flex-col justify-between gap-2 size-full">
+                  <div className="flex flex-col">
+                    <ProductTitle
+                      className="line-clamp-2 text-black"
+                      productTitle={product.title}
+                    />
+                    <ProductPrice
+                      productPrice={product.price}
+                      className="text-muted-foreground text-md"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between w-full">
+                    <Heart size={20} />
+                    <ProductsCartQuantity
+                      productQuantity={product.quantity}
+                      plusProductQuantity={() =>
+                        plusProductQuantity(product.id)
+                      }
+                      minusProductQuantity={() =>
+                        minusProductQuantity(product.id)
+                      }
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </Card>
-        ))}
+            </Card>
+          );
+        })}
       </div>
     </>
   );
