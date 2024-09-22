@@ -1,6 +1,6 @@
 'use client';
 
-import { ProductsInCart } from '@/lib/type';
+import type { TCartSummary, ProductsInCart } from '@/lib/type';
 import { useCart } from '@/hooks/useCart';
 import CartSummary from '@/components/cart-summary';
 import Container from '@/components/container';
@@ -38,8 +38,8 @@ export default function CartPage({ params }: { params: { userId: string } }) {
               unSelectAllProduct={unSelectAllProduct}
             />
           </div>
-          <div className="col-span-6 sticky bottom-0 md:col-span-2">
-            <CartSummary totalPrice={cartSummary?.totalPrice as number} />
+          <div className="col-span-6 md:col-span-2">
+            <CartSummary cartSummary={cartSummary as TCartSummary} />
           </div>
         </div>
       </Container>

@@ -1,19 +1,18 @@
-import { CartSummary, ProductsInCart } from '@/lib/type';
+import { TCartSummary, ProductsInCart } from '@/lib/type';
 import { getProductsInCart } from '@/services/cart';
 import { useEffect, useState } from 'react';
 
 export function useCart(userId: number) {
-  const [cartSummary, setCartSummary] = useState<CartSummary>();
+  const [cartSummary, setCartSummary] = useState<TCartSummary>();
   const products = cartSummary?.products;
 
   const getTotalPrice = (products: ProductsInCart[]) => {
     return products
       .filter((product) => product.status === 'SELECT')
-      .reduce(
-        (total, product) =>
-          Math.floor(total + product.price * product.quantity),
-        0,
-      );
+      .reduce((total, product) => {
+        const totalPrice = total + product.price * product.quantity;
+        return parseFloat(totalPrice.toFixed(2));
+      }, 0);
   };
 
   const plusProductQuantity = (productId: number) => {
@@ -153,7 +152,7 @@ export function useCart(userId: number) {
       const productsInCart = await getProductsInCart(userId);
 
       if (productsInCart) {
-        const initCartSummary: CartSummary = {
+        const initCartSummary: TCartSummary = {
           id: Math.random(),
           products: productsInCart,
           totalPrice: 0,

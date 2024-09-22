@@ -50,7 +50,7 @@ export type ResponseCart = {
   products: ResponseProductsInCart[];
 };
 
-export type CartSummary = {
+export type TCartSummary = {
   id: number;
   products: ProductsInCart[];
   totalPrice: number;
