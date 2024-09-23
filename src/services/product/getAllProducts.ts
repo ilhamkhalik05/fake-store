@@ -1,5 +1,6 @@
 import type { Product } from '@/lib/type';
 import { API_BASE_URL } from '@/lib/api';
+import { handleApiError } from '@/lib/utils';
 
 type TGetAllProducts = {
   limit?: number;
@@ -24,6 +25,11 @@ export const getAllProducts = async ({
     }
 
     const res = await fetch(`${API_BASE_URL}/products${additionalParams}`);
+
+    if (!res.ok) {
+      handleApiError('fetch all product', res.statusText);
+    }
+
     const data = await res.json();
     return data;
   } catch (error) {

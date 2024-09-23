@@ -1,6 +1,6 @@
 import type { ResponseCart, ProductsInCart } from '@/lib/type';
 import { getUserCart } from './getUserCart';
-import { getProductsById } from '../product';
+import { getProductById } from '../product';
 
 export const getProductsInCart = async (
   userId: number,
@@ -11,7 +11,7 @@ export const getProductsInCart = async (
 
     const productsInCart = await Promise.all(
       products.map(async (product) => {
-        const singleProductInCart = await getProductsById(product.productId);
+        const singleProductInCart = await getProductById(product.productId);
         return {
           ...singleProductInCart,
           quantity: 1,

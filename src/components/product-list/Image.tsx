@@ -9,7 +9,7 @@ export const ProductImage = ({
 }) => {
   return (
     <img
-      className={cn(className)}
+      className={cn('select-none', className)}
       src={productImage}
       alt={'an error occured'}
     />

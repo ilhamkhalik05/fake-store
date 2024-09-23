@@ -38,7 +38,7 @@ export const ProductsCartHeader = ({
         />
         <label
           htmlFor="selectAll"
-          className="text-sm text-muted-foreground cursor-pointer"
+          className="text-sm text-muted-foreground cursor-pointer select-none"
         >
           Select All
         </label>

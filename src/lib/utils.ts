@@ -18,3 +18,7 @@ export function getTotalQuantity(products: ProductsInCart[]) {
 
   return totalQuantity;
 }
+
+export function handleApiError(action: string, statusText: string) {
+  throw new Error(`Failed to ${action}: ${statusText}`);
+}

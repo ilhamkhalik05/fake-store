@@ -1,5 +1,5 @@
 import { renderCategory } from '@/components/category';
-import { getSingleProducts, getRelatedProducts } from '@/services/product';
+import { getProductById, getRelatedProducts } from '@/services/product';
 
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
@@ -18,7 +18,7 @@ export default async function ProductPage({
   params: { id: string };
 }) {
   const [product, relatedProduct] = await Promise.all([
-    getSingleProducts(Number(params.id)),
+    getProductById(Number(params.id)),
     getRelatedProducts(Number(params.id)),
   ]);
 
