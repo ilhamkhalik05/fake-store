@@ -16,34 +16,40 @@ export default async function ProductList({
   return (
     <div className={`flex flex-row items-center gap-3 overflow-x-auto w-full`}>
       {!!products?.length &&
-        products.map((product: Product) => (
-          // Card Wrapper
-          <Link
-            className="cursor-pointer flex flex-col w-[200px] opacity-75 hover:opacity-100 transition-opacity duration-200"
-            key={product.id}
-            href={'/product/' + product.id}
-          >
-            {/* Card Image */}
-            <Card className="p-3">
-              <ProductImage
-                className="h-32 object-fit m-auto"
-                productImage={product.image}
-              />
-            </Card>
+        products.map((product: Product) => {
+          const productCategory = renderCategory(
+            product.category,
+          ) as JSX.Element;
 
-            {/* Card Items */}
-            <CardContent className="p-2">
-              {renderCategory(product.category)}
+          return (
+            // Card Wrapper
+            <Link
+              className="cursor-pointer flex flex-col w-52 h-72 opacity-75 hover:opacity-100 transition-opacity duration-200"
+              key={product.id}
+              href={'/product/' + product.id}
+            >
+              {/* Card Image */}
+              <Card className="h-1/2 p-3">
+                <ProductImage
+                  className="object-contain size-28"
+                  productImage={product.image}
+                />
+              </Card>
 
-              <ProductTitle productTitle={product.title} />
+              {/* Card Items */}
+              <CardContent className="h-1/2 mt-3 px-1 space-y-1">
+                {productCategory}
 
-              <div className="flex justify-between mt-1">
-                <ProductPrice productPrice={product.price} />
-                <ProductRate productRate={product.rating.rate} />
-              </div>
-            </CardContent>
-          </Link>
-        ))}
+                <ProductTitle productTitle={product.title} />
+
+                <div className="flex justify-between mt-1">
+                  <ProductPrice productPrice={product.price} />
+                  <ProductRate productRate={product.rating.rate} />
+                </div>
+              </CardContent>
+            </Link>
+          );
+        })}
     </div>
   );
 }

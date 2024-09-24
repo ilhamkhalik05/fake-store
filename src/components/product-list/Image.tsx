@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 export const ProductImage = ({
   className,
@@ -8,10 +9,12 @@ export const ProductImage = ({
   productImage: string;
 }) => {
   return (
-    <img
-      className={cn('select-none', className)}
+    <Image
+      className={cn('select-none m-auto', className)}
       src={productImage}
-      alt={'an error occured'}
+      alt={'cannot load image'}
+      width={1000}
+      height={1000}
     />
   );
 };
