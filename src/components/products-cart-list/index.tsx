@@ -8,6 +8,7 @@ import { ProductsCartHeader } from './ProductsCartHeader';
 import { ProductsInCart } from '@/lib/type';
 import { ProductsCartQuantity } from './ProductsCartQuantity';
 import { useEffect, useState } from 'react';
+import { AddToWishlistButton } from '../utils';
 
 type TProductsCartList = {
   products: ProductsInCart[];
@@ -81,7 +82,7 @@ export default function ProductsCartList({
                     />
                   </div>
                   <div className="flex items-center justify-between w-full">
-                    <Heart size={20} />
+                    <AddToWishlistButton />
                     <ProductsCartQuantity
                       productQuantity={product.quantity}
                       plusProductQuantity={() =>
