@@ -163,7 +163,7 @@ export function useCart(userId: number) {
     };
 
     initializeCartSummary();
-  });
+  }, []);
 
   return {
     data: cartSummary,

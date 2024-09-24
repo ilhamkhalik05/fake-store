@@ -1,3 +1,4 @@
 export * from './AddToCartButton'
+export * from './AddToWishlistButton'
 export * from './RedirectToHome'
 export * from './NavigateToCartButton'

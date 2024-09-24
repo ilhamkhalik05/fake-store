@@ -4,6 +4,7 @@ import { poppins } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
 import './globals.css';
 import 'notyf/notyf.min.css';
+import { TooltipProvider } from '@/components/@shadcn-ui/tooltip';
 
 export const metadata = getMetadata({
   title: 'Find the best products with the best price',
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(poppins.className)}>
-        <SessionProviderWrapper>{children}</SessionProviderWrapper>
+        <SessionProviderWrapper>
+          <TooltipProvider>{children}</TooltipProvider>
+        </SessionProviderWrapper>
       </body>
     </html>
   );
