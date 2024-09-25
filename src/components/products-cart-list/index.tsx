@@ -1,9 +1,8 @@
 import { Card } from '../@shadcn-ui/card';
 import { Checkbox } from '../@shadcn-ui/checkbox';
-import { ProductImage } from '../product-list/Image';
-import { ProductTitle } from '../product-list/Title';
-import { ProductPrice } from '../product-list/Price';
-import { Heart } from 'lucide-react';
+import { ProductImage } from '../product-card/Image';
+import { ProductTitle } from '../product-card/Title';
+import { ProductPrice } from '../product-card/Price';
 import { ProductsCartHeader } from './ProductsCartHeader';
 import { ProductsInCart } from '@/lib/type';
 import { ProductsCartQuantity } from './ProductsCartQuantity';

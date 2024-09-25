@@ -5,11 +5,11 @@ import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import Container from '@/components/container';
 import Link from 'next/link';
-import { ProductRate } from '@/components/product-list/Rate';
-import { ProductTitle } from '@/components/product-list/Title';
+import { ProductRate } from '@/components/product-card/Rate';
+import { ProductTitle } from '@/components/product-card/Title';
 import { Button } from '@/components/@shadcn-ui/button';
-import { ProductImage } from '@/components/product-list/Image';
-import { ProductDescription } from '@/components/product-list/Description';
+import { ProductImage } from '@/components/product-card/Image';
+import { ProductDescription } from '@/components/product-card/Description';
 import { AddToCartButton } from '@/components/utils';
 
 export default async function ProductPage({
