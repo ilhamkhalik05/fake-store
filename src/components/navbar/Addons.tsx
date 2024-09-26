@@ -1,7 +1,7 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { BellRing } from 'lucide-react';
+import { BellRing, User, User2 } from 'lucide-react';
 import { Button } from '../@shadcn-ui/button';
 import {
   DropdownMenu,
@@ -18,17 +18,33 @@ export const Addons = () => {
   const pathname = usePathname();
   const { data: session } = useSession();
   return (
-    <div className="flex items-center gap-2">
-      <Button variant={'outline'} size={'icon'} className="rounded-lg">
+    <div className="flex items-center gap-2 md:gap-2.5">
+      <Button variant={'outline'} size={'icon'} className="rounded-full">
         <BellRing size={18} />
       </Button>
       {!pathname.startsWith('/cart') && <NavigateToCartButton />}
 
       {!session ? (
         <Link href={'/auth'}>
-          <Avatar className="cursor-pointer ml-2 size-10">
-            <AvatarFallback>U</AvatarFallback>
-          </Avatar>
+          {/* Mobile Version */}
+          <div className="block md:hidden">
+            <Button
+              variant={'default'}
+              size={'icon'}
+              className="bg-gray-800 ml-1.5 rounded-xl active:scale-95 transition-transform duration-300"
+            >
+              <User2 size={20} />
+            </Button>
+          </div>
+          {/* Desktop Version */}
+          <div className="hidden md:block">
+            <Button
+              variant={'default'}
+              className="px-6 ml-3 font-semibold rounded-lg active:scale-95 transition-transform duration-300"
+            >
+              Log In
+            </Button>
+          </div>
         </Link>
       ) : (
         <DropdownMenu>
