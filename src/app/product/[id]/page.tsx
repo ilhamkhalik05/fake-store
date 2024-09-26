@@ -27,17 +27,17 @@ export default async function ProductPage({
       <Navbar />
 
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-14 mt-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14 mt-3">
           {/* Product Image */}
           <div className="border-2 border-gray-200 shadow-lg cursor-pointer hover:scale-105 transition-all duration-700 rounded-xl flex items-center justify-center py-5">
             <ProductImage
-              className="w-72 object-contain"
+              className="w-48 md:52 lg:w-60 object-contain"
               productImage={product?.image as string}
             />
           </div>
 
           {/* Main Content */}
-          <main className="flex flex-col border-b-2 border-black pb-10 md:border-0">
+          <main className="flex flex-col -mt-2 border-b-2 border-black pb-10 md:m-0 md:border-0">
             {/* Product Category and Rating */}
             <div className="self-start flex justify-between items-center w-full mb-3">
               {renderCategory(product?.category as string)}
@@ -63,14 +63,14 @@ export default async function ProductPage({
           </main>
 
           {/* Related Products */}
-          <div>
-            <h1 className="text-xl font-medium mb-6 underline underline-offset-4">
+          <div className="md:col-span-3 lg:col-span-1">
+            <h1 className="text-xl font-medium mb-6 tracking-wide text-muted-foreground">
               Related Products
             </h1>
             <div className="flex flex-col flex-1 gap-4">
               {relatedProduct?.map((product) => (
                 <Link
-                  className="group flex items-start gap-3 text-wrap w-full opacity-80 hover:opacity-100 duration-300"
+                  className="group flex items-start gap-3 text-wrap w-full opacity-80 hover:opacity-100 active:scale-95 transition-all duration-300"
                   key={product.id}
                   href={'/product/' + product.id}
                 >

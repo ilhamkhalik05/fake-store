@@ -2,9 +2,9 @@ import SessionProviderWrapper from './session-provider';
 import { getMetadata } from '@/lib/meta';
 import { poppins } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
+import { TooltipProvider } from '@/components/@shadcn-ui/tooltip';
 import './globals.css';
 import 'notyf/notyf.min.css';
-import { TooltipProvider } from '@/components/@shadcn-ui/tooltip';
 
 export const metadata = getMetadata({
   title: 'Find the best products with the best price',
