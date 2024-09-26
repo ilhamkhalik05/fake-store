@@ -25,7 +25,7 @@ export const BannerLinks = () => {
 
   if (status === 'authenticated') {
     return (
-      <Button className="mt-4" variant={'outline'}>
+      <Button className="w-full mt-4 lg:w-1/3" variant={'outline'}>
         See our products
       </Button>
     );

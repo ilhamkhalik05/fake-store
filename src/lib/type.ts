@@ -33,9 +33,11 @@ export type Product = {
   };
 };
 
+export type ProductStatus = "REST" | "SELECT" | "CHECKOUT"
+
 export interface ProductsInCart extends Product {
   quantity: number;
-  status: string;
+  status: ProductStatus;
 }
 
 export type ResponseProductsInCart = {

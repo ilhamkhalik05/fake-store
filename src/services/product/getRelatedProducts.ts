@@ -1,5 +1,5 @@
-import { getProductById } from './getProductById';
-import { type Category, getProductsByCategory } from './getProductsByCategory';
+import { getProductById } from "./getProductById";
+import { type Category, getProductsByCategory } from "./getProductsByCategory";
 
 export const getRelatedProducts = async (id: number) => {
   try {
@@ -8,10 +8,7 @@ export const getRelatedProducts = async (id: number) => {
       category: product?.category as Category,
     });
 
-    const relatedProducts = productByCategory?.filter(
-      (product) => product.id !== Number(id),
-    );
-
+    const relatedProducts = productByCategory?.filter((product) => product.id !== Number(id));
     return relatedProducts;
   } catch (error) {
     console.error(error);

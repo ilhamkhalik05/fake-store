@@ -1,14 +1,15 @@
-import { TCartSummary, ProductsInCart } from '@/lib/type';
-import { getProductsInCart } from '@/services/cart';
-import { useEffect, useState } from 'react';
+import type { TCartSummary, ProductsInCart } from "@/lib/type";
+import { useEffect, useState } from "react";
+import { onMinusProductQuantity, onPlusProductQuantity, onSelectProduct, onUnSelectProduct } from "@/lib/cart";
+import { getProductsInCart } from "@/services/cart";
 
 export function useCart(userId: number) {
   const [cartSummary, setCartSummary] = useState<TCartSummary>();
-  const products = cartSummary?.products;
+  const products = cartSummary?.products as ProductsInCart[];
 
   const getTotalPrice = (products: ProductsInCart[]) => {
     return products
-      .filter((product) => product.status === 'SELECT')
+      .filter((product) => product.status === "SELECT")
       .reduce((total, product) => {
         const totalPrice = total + product.price * product.quantity;
         return parseFloat(totalPrice.toFixed(2));
@@ -18,13 +19,8 @@ export function useCart(userId: number) {
   const plusProductQuantity = (productId: number) => {
     if (!productId) return;
 
-    // Add product quantity by 1
-    const updatedProducts =
-      products?.map((product) => {
-        return product.id === productId
-          ? { ...product, quantity: product.quantity + 1 }
-          : product;
-      }) || [];
+    const updatedProducts = onPlusProductQuantity(products, productId);
+    const updatedTotalPrice = getTotalPrice(updatedProducts);
 
     // Set new state
     setCartSummary((prevState) => {
@@ -32,9 +28,7 @@ export function useCart(userId: number) {
       return {
         ...prevState,
         products: updatedProducts,
-        totalPrice: updatedProducts
-          ? getTotalPrice(updatedProducts)
-          : prevState.totalPrice,
+        totalPrice: updatedTotalPrice,
       };
     });
   };
@@ -42,13 +36,8 @@ export function useCart(userId: number) {
   const minusProductQuantity = (productId: number) => {
     if (!productId) return;
 
-    // Minus product quantity by 1
-    const updatedProducts =
-      products?.map((product) => {
-        return product.id === productId && product.quantity > 1
-          ? { ...product, quantity: product.quantity - 1 }
-          : product;
-      }) || [];
+    const updatedProducts = onMinusProductQuantity(products, productId);
+    const updatedTotalPrice = getTotalPrice(updatedProducts);
 
     // Set new state
     setCartSummary((prevState) => {
@@ -56,9 +45,7 @@ export function useCart(userId: number) {
       return {
         ...prevState,
         products: updatedProducts,
-        totalPrice: updatedProducts
-          ? getTotalPrice(updatedProducts)
-          : prevState.totalPrice,
+        totalPrice: updatedTotalPrice,
       };
     });
   };
@@ -66,13 +53,8 @@ export function useCart(userId: number) {
   const selectProduct = (productId: number, productQuantity: number) => {
     if (!productId && !productQuantity) return;
 
-    // Change status to SELECT
-    const updatedProducts =
-      products?.map((product) => {
-        return product.id === productId
-          ? { ...product, quantity: productQuantity, status: 'SELECT' }
-          : product;
-      }) || [];
+    const updatedProducts = onSelectProduct({ products, productId, productQuantity, selectAll: false });
+    const updatedTotalPrice = getTotalPrice(updatedProducts);
 
     // Set new state
     setCartSummary((prevState) => {
@@ -80,9 +62,7 @@ export function useCart(userId: number) {
       return {
         ...prevState,
         products: updatedProducts,
-        totalPrice: updatedProducts
-          ? getTotalPrice(updatedProducts as ProductsInCart[])
-          : prevState.totalPrice,
+        totalPrice: updatedTotalPrice,
       };
     });
   };
@@ -90,13 +70,8 @@ export function useCart(userId: number) {
   const unSelectProduct = (productId: number) => {
     if (!productId) return;
 
-    // Change quantity to 1 and status to REST
-    const updatedProducts =
-      products?.map((product) => {
-        return product.id === productId
-          ? { ...product, quantity: 1, status: 'REST' }
-          : product;
-      }) || [];
+    const updatedProducts = onUnSelectProduct({ products, productId, unselectAll: false });
+    const updatedTotalPrice = getTotalPrice(updatedProducts);
 
     // Set new state
     setCartSummary((prevState) => {
@@ -104,18 +79,14 @@ export function useCart(userId: number) {
       return {
         ...prevState,
         products: updatedProducts,
-        totalPrice: updatedProducts
-          ? getTotalPrice(updatedProducts as ProductsInCart[])
-          : prevState.totalPrice,
+        totalPrice: updatedTotalPrice,
       };
     });
   };
 
   const selectAllProduct = () => {
-    const updatedProducts = products?.map((product) => ({
-      ...product,
-      status: 'SELECT',
-    }));
+    const updatedProducts = onSelectProduct({ products, selectAll: true });
+    const updatedTotalPrice = getTotalPrice(updatedProducts);
 
     // Set new state
     setCartSummary((prevState) => {
@@ -123,17 +94,14 @@ export function useCart(userId: number) {
       return {
         ...prevState,
         products: updatedProducts,
-        totalPrice: getTotalPrice(updatedProducts as ProductsInCart[]),
+        totalPrice: updatedTotalPrice,
       };
     });
   };
 
   const unSelectAllProduct = () => {
-    const updatedProducts = products?.map((product) => ({
-      ...product,
-      status: 'REST',
-      quantity: 1,
-    }));
+    const updatedProducts = onUnSelectProduct({ products, unselectAll: true });
+    const updatedTotalPrice = getTotalPrice(updatedProducts);
 
     // Set new state
     setCartSummary((prevState) => {
@@ -141,7 +109,7 @@ export function useCart(userId: number) {
       return {
         ...prevState,
         products: updatedProducts,
-        totalPrice: getTotalPrice(updatedProducts as ProductsInCart[]),
+        totalPrice: updatedTotalPrice,
       };
     });
   };
@@ -152,13 +120,13 @@ export function useCart(userId: number) {
       const productsInCart = await getProductsInCart(userId);
 
       if (productsInCart) {
-        const initCartSummary: TCartSummary = {
+        const initCartSummaryData: TCartSummary = {
           id: Math.random(),
           products: productsInCart,
           totalPrice: 0,
         };
 
-        setCartSummary(initCartSummary);
+        setCartSummary(initCartSummaryData);
       }
     };
 
