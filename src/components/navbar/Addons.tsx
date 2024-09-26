@@ -1,7 +1,8 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { BellRing, User, User2 } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { BellRing, User2 } from 'lucide-react';
 import { Button } from '../@shadcn-ui/button';
 import {
   DropdownMenu,
@@ -12,7 +13,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '../@shadcn-ui/avatar';
 import { UserMenu } from './UserMenu';
 import { NavigateToCartButton } from '../utils';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 export const Addons = () => {
   const pathname = usePathname();

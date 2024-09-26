@@ -11,7 +11,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const productCategory = renderCategory(product.category);
   return (
     <Link
-      className="cursor-pointer flex flex-col w-52 h-72 opacity-75 hover:opacity-100 transition-opacity duration-200"
+      className="cursor-pointer flex flex-col w-52 h-72 opacity-75 hover:opacity-100 active:scale-95 transition-all duration-300"
       href={'/product/' + product.id}
     >
       <Card className="h-1/2 p-3">

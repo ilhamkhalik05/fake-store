@@ -15,6 +15,7 @@ export const ProductImage = ({
       alt={'cannot load image'}
       width={1000}
       height={1000}
+      priority={true}
     />
   );
 };
