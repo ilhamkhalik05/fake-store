@@ -1,8 +1,8 @@
 "use client";
 
 import type { TCartSummary, ProductsInCart } from "@/lib/type";
-import React from "react";
 import { useCart } from "@/hooks/useCart";
+import React from "react";
 import CartSummary from "@/components/cart-summary";
 import Container from "@/components/container";
 import Footer from "@/components/footer";

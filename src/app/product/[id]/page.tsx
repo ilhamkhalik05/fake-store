@@ -8,10 +8,9 @@ import Container from "@/components/container";
 import Link from "next/link";
 import { ProductRate } from "@/components/product-card/Rate";
 import { ProductTitle } from "@/components/product-card/Title";
-import { Button } from "@/components/@shadcn-ui/button";
 import { ProductImage } from "@/components/product-card/Image";
 import { ProductDescription } from "@/components/product-card/Description";
-import { AddToCartButton } from "@/components/utils";
+import { AddToCartButton, BuyNowButton } from "@/components/utils";
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
   const [product, relatedProduct] = await Promise.all([
@@ -49,7 +48,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
             {/* Action Button Group */}
             <div className="grid grid-cols-2 gap-2 mt-3">
-              <Button variant={"default"}>Buy Now</Button>
+              <BuyNowButton />
               <AddToCartButton />
             </div>
           </main>
