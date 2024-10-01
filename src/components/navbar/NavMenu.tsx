@@ -1,5 +1,9 @@
+"use client";
+
+import React from "react";
 import { HeartIcon, LayoutGrid } from "lucide-react";
 import { Button } from "../@shadcn-ui/button";
+import { showUnavailableFeatureNotification } from "@/lib/notyf";
 import Link from "next/link";
 
 export const NavMenu = ({ mobileOnly }: { mobileOnly?: boolean }) => {
@@ -8,11 +12,13 @@ export const NavMenu = ({ mobileOnly }: { mobileOnly?: boolean }) => {
       title: "Home",
       icon: <LayoutGrid size={20} />,
       path: "/",
+      available: true,
     },
     {
       title: "Wishlist",
       icon: <HeartIcon size={20} />,
-      path: "/wishlist", // Not available yet
+      path: "/wishlist",
+      available: false,
     },
   ];
 
@@ -42,14 +48,27 @@ export const NavMenu = ({ mobileOnly }: { mobileOnly?: boolean }) => {
 const DesktopNavMenu = ({ menuList }: { menuList: any[] }) => {
   return (
     <div className="flex flex-row items-center">
-      {menuList.map((menu, index) => (
-        <Link key={index} href={menu.path}>
-          <Button variant={"ghost"} size={"sm"} className="flex items-center gap-2.5 px-4">
+      {menuList.map((menu, idx) => {
+        return menu.available ? (
+          <Link key={idx} href={menu.path}>
+            <Button variant={"ghost"} size={"sm"} className="flex items-center gap-2.5 px-4">
+              {menu.icon}
+              {menu.title}
+            </Button>
+          </Link>
+        ) : (
+          <Button
+            key={idx}
+            className="flex items-center gap-2.5 px-4"
+            variant={"ghost"}
+            size={"sm"}
+            onClick={() => showUnavailableFeatureNotification()}
+          >
             {menu.icon}
             {menu.title}
           </Button>
-        </Link>
-      ))}
+        );
+      })}
     </div>
   );
 };
