@@ -1,7 +1,8 @@
-import Container from '@/components/container';
-import AuthForm from '@/components/auth-form';
-import { NavMenu } from '@/components/navbar/NavMenu';
-import { RedirectToHome } from '@/components/utils';
+import React from "react";
+import Container from "@/components/container";
+import AuthForm from "@/components/auth-form";
+import { NavMenu } from "@/components/navbar/NavMenu";
+import { RedirectToHome } from "@/components/utils";
 
 export default function AuthPage() {
   return (

@@ -1,22 +1,19 @@
-import { renderCategory } from '@/components/category';
-import { getProductById, getRelatedProducts } from '@/services/product';
+import React from "react";
+import { renderCategory } from "@/components/category";
+import { getProductById, getRelatedProducts } from "@/services/product";
 
-import Footer from '@/components/footer';
-import Navbar from '@/components/navbar';
-import Container from '@/components/container';
-import Link from 'next/link';
-import { ProductRate } from '@/components/product-card/Rate';
-import { ProductTitle } from '@/components/product-card/Title';
-import { Button } from '@/components/@shadcn-ui/button';
-import { ProductImage } from '@/components/product-card/Image';
-import { ProductDescription } from '@/components/product-card/Description';
-import { AddToCartButton } from '@/components/utils';
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
+import Container from "@/components/container";
+import Link from "next/link";
+import { ProductRate } from "@/components/product-card/Rate";
+import { ProductTitle } from "@/components/product-card/Title";
+import { Button } from "@/components/@shadcn-ui/button";
+import { ProductImage } from "@/components/product-card/Image";
+import { ProductDescription } from "@/components/product-card/Description";
+import { AddToCartButton } from "@/components/utils";
 
-export default async function ProductPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function ProductPage({ params }: { params: { id: string } }) {
   const [product, relatedProduct] = await Promise.all([
     getProductById(Number(params.id)),
     getRelatedProducts(Number(params.id)),
@@ -30,10 +27,7 @@ export default async function ProductPage({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14 mt-3">
           {/* Product Image */}
           <div className="border-2 border-gray-200 shadow-lg cursor-pointer hover:scale-105 transition-all duration-700 rounded-xl flex items-center justify-center py-5">
-            <ProductImage
-              className="w-48 md:52 lg:w-60 object-contain"
-              productImage={product?.image as string}
-            />
+            <ProductImage className="w-48 md:52 lg:w-60 object-contain" productImage={product?.image as string} />
           </div>
 
           {/* Main Content */}
@@ -50,34 +44,27 @@ export default async function ProductPage({
                 className="text-xl font-semibold text-foreground line-clamp-none mb-3"
                 productTitle={product?.title as string}
               />
-              <ProductDescription
-                productDescription={product?.description as string}
-              />
+              <ProductDescription productDescription={product?.description as string} />
             </section>
 
             {/* Action Button Group */}
             <div className="grid grid-cols-2 gap-2 mt-3">
-              <Button variant={'default'}>Buy Now</Button>
+              <Button variant={"default"}>Buy Now</Button>
               <AddToCartButton />
             </div>
           </main>
 
           {/* Related Products */}
           <div className="md:col-span-3 lg:col-span-1">
-            <h1 className="text-xl font-medium mb-6 tracking-wide text-muted-foreground">
-              Related Products
-            </h1>
+            <h1 className="text-xl font-medium mb-6 tracking-wide text-muted-foreground">Related Products</h1>
             <div className="flex flex-col flex-1 gap-4">
               {relatedProduct?.map((product) => (
                 <Link
                   className="group flex items-start gap-3 text-wrap w-full opacity-80 hover:opacity-100 active:scale-95 transition-all duration-300"
                   key={product.id}
-                  href={'/product/' + product.id}
+                  href={"/product/" + product.id}
                 >
-                  <ProductImage
-                    className="w-12 m-auto object-contain"
-                    productImage={product.image}
-                  />
+                  <ProductImage className="w-12 m-auto object-contain" productImage={product.image} />
                   <div className="flex flex-col gap-2 w-full">
                     <ProductTitle productTitle={product.title} />
                     <ProductRate productRate={product.rating.rate} />

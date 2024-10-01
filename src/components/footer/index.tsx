@@ -1,7 +1,8 @@
-import { AboutUs } from './AboutUs';
-import { CustomerCare } from './CustomerCare';
-import { TermsAndCondition } from './TermsAndCondition';
-import { DownloadApp } from './DownloadApp';
+import React from "react";
+import { AboutUs } from "./AboutUs";
+import { CustomerCare } from "./CustomerCare";
+import { TermsAndCondition } from "./TermsAndCondition";
+import { DownloadApp } from "./DownloadApp";
 
 export default function Footer() {
   return (
@@ -13,17 +14,13 @@ export default function Footer() {
         <DownloadApp />
       </div>
 
-      <footer className="p-5 bg-foreground text-white">
-        All rights reserved &copy; 2024 - Ilham Khalik
-      </footer>
+      <footer className="p-5 bg-foreground text-white">All rights reserved &copy; 2024 - Ilham Khalik</footer>
     </>
   );
 }
 
 export const FooterTitle = ({ children }: { children: React.ReactNode }) => {
   return (
-    <h1 className="text-lg text-muted-foreground font-semibold uppercase underline underline-offset-4">
-      {children}
-    </h1>
+    <h1 className="text-lg text-muted-foreground font-semibold uppercase underline underline-offset-4">{children}</h1>
   );
 };

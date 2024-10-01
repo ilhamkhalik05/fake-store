@@ -1,12 +1,13 @@
-'use client';
+"use client";
 
-import type { TCartSummary, ProductsInCart } from '@/lib/type';
-import { useCart } from '@/hooks/useCart';
-import CartSummary from '@/components/cart-summary';
-import Container from '@/components/container';
-import Footer from '@/components/footer';
-import Navbar from '@/components/navbar';
-import ProductsCartList from '@/components/products-cart-list';
+import type { TCartSummary, ProductsInCart } from "@/lib/type";
+import React from "react";
+import { useCart } from "@/hooks/useCart";
+import CartSummary from "@/components/cart-summary";
+import Container from "@/components/container";
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
+import ProductsCartList from "@/components/products-cart-list";
 
 export default function CartPage({ params }: { params: { userId: string } }) {
   const userId = Number(params.userId);

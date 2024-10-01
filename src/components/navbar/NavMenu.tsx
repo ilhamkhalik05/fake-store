@@ -1,18 +1,18 @@
-import { HeartIcon, HouseIcon } from 'lucide-react';
-import { Button } from '../@shadcn-ui/button';
-import Link from 'next/link';
+import { HeartIcon, LayoutGrid } from "lucide-react";
+import { Button } from "../@shadcn-ui/button";
+import Link from "next/link";
 
 export const NavMenu = ({ mobileOnly }: { mobileOnly?: boolean }) => {
   const menuList = [
     {
-      title: 'Home',
-      icon: <HouseIcon size={24} />,
-      path: '/',
+      title: "Home",
+      icon: <LayoutGrid size={20} />,
+      path: "/",
     },
     {
-      title: 'Wishlist',
-      icon: <HeartIcon size={24} />,
-      path: '/wishlist', // Not available yet
+      title: "Wishlist",
+      icon: <HeartIcon size={20} />,
+      path: "/wishlist", // Not available yet
     },
   ];
 
@@ -44,11 +44,7 @@ const DesktopNavMenu = ({ menuList }: { menuList: any[] }) => {
     <div className="flex flex-row items-center">
       {menuList.map((menu, index) => (
         <Link key={index} href={menu.path}>
-          <Button
-            variant={'ghost'}
-            size={'sm'}
-            className="flex items-center gap-2.5 px-4"
-          >
+          <Button variant={"ghost"} size={"sm"} className="flex items-center gap-2.5 px-4">
             {menu.icon}
             {menu.title}
           </Button>
@@ -64,8 +60,8 @@ const MobileNavMenu = ({ menuList }: { menuList: any[] }) => {
       {menuList.map((menu, index) => (
         <Link key={index} href={menu.path}>
           <Button
-            variant={'ghost'}
-            size={'lg'}
+            variant={"ghost"}
+            size={"lg"}
             className={`flex flex-col items-center gap-1 text-xs hover:scale-105 hover:-translate-y-1 transition-all duration-200`}
           >
             {menu.icon}
