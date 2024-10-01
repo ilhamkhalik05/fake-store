@@ -2,7 +2,9 @@ import { ProductsInCart } from "./type";
 
 export function onPlusProductQuantity(products: ProductsInCart[], productId: number) {
   return products?.map((product) => {
-    return product.id === productId && product.quantity > 0 ? { ...product, quantity: product.quantity + 1 } : product;
+    return product.id === productId && product.quantity > 0 && product.quantity < 20
+      ? { ...product, quantity: product.quantity + 1 }
+      : product;
   });
 }
 

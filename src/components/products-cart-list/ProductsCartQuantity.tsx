@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Minus, Plus } from 'lucide-react';
+import { Minus, Plus } from "lucide-react";
 
 export const ProductsCartQuantity = ({
   productQuantity,
@@ -15,11 +15,15 @@ export const ProductsCartQuantity = ({
     <div className="flex items-center gap-3 ring-1 ring-gray-300 rounded-lg px-2 py-1">
       <Minus
         size={20}
-        className="text-red-500"
+        className="text-red-500 active:scale-[130%] transition-trasnform duration-300"
         onClick={minusProductQuantity}
       />
       <span className="select-none">{productQuantity}</span>
-      <Plus size={20} className="text-black" onClick={plusProductQuantity} />
+      <Plus
+        size={20}
+        className="text-black active:scale-[130%] transition-trasnform duration-300"
+        onClick={plusProductQuantity}
+      />
     </div>
   );
 };

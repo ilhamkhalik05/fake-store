@@ -1,15 +1,17 @@
-import { Card } from '../@shadcn-ui/card';
-import { Checkbox } from '../@shadcn-ui/checkbox';
-import { ProductImage } from '../product-card/Image';
-import { ProductTitle } from '../product-card/Title';
-import { ProductPrice } from '../product-card/Price';
-import { ProductsCartHeader } from './ProductsCartHeader';
-import { ProductsInCart } from '@/lib/type';
-import { ProductsCartQuantity } from './ProductsCartQuantity';
-import { useEffect, useState } from 'react';
-import { AddToWishlistButton } from '../utils';
+"use client";
 
-type TProductsCartList = {
+import React from "react";
+import { ProductsCartHeader } from "./ProductsCartHeader";
+import { ProductsInCart } from "@/lib/type";
+import { useEffect, useState } from "react";
+import { ProductCartCardSkeleton } from "../skeleton";
+import dynamic from "next/dynamic";
+
+const ProductCartCard = dynamic(() => import("../product-cart-card"), {
+  loading: () => <ProductCartCardSkeleton />,
+});
+
+type ProductCardListProps = {
   products: ProductsInCart[];
   plusProductQuantity: (productId: number) => void;
   minusProductQuantity: (productId: number) => void;
@@ -27,13 +29,11 @@ export default function ProductsCartList({
   unSelectProduct,
   selectAllProduct,
   unSelectAllProduct,
-}: TProductsCartList) {
+}: ProductCardListProps) {
   const [isSelectAll, setIsSelectAll] = useState(false);
 
   useEffect(() => {
-    const allSelected = products?.every(
-      (product) => product.status === 'SELECT',
-    );
+    const allSelected = products?.every((product) => product.status === "SELECT");
     setIsSelectAll(allSelected);
   }, [products]);
 
@@ -47,56 +47,20 @@ export default function ProductsCartList({
       />
 
       <div className="flex flex-col gap-4 w-full">
-        {products?.map((product) => {
-          const isSelect = product.status === 'SELECT' || isSelectAll;
-          return (
-            <Card
-              key={product.id}
-              className="cursor-pointer relative ps-10 pe-6 py-4 rounded-2xl"
-            >
-              <Checkbox
-                className="absolute top-3.5 left-3.5"
-                checked={isSelect}
-                onClick={
-                  isSelect
-                    ? () => unSelectProduct(product.id)
-                    : () => selectProduct(product.id, product.quantity)
-                }
+        {products?.length > 0 &&
+          products.map((product) => {
+            return (
+              <ProductCartCard
+                key={product.id}
+                isSelectAll={isSelectAll}
+                product={product}
+                selectProduct={() => selectProduct(product.id, product.quantity)}
+                unSelectProduct={() => unSelectProduct(product.id)}
+                plusProductQuantity={() => plusProductQuantity(product.id)}
+                minusProductQuantity={() => minusProductQuantity(product.id)}
               />
-
-              <div className="flex items-start gap-5 w-full">
-                <ProductImage
-                  productImage={product.image}
-                  className="size-20 object-contain"
-                />
-                <div className="flex flex-col justify-between gap-2 size-full">
-                  <div className="flex flex-col">
-                    <ProductTitle
-                      className="line-clamp-2 text-black"
-                      productTitle={product.title}
-                    />
-                    <ProductPrice
-                      productPrice={product.price}
-                      className="text-muted-foreground text-md"
-                    />
-                  </div>
-                  <div className="flex items-center justify-between w-full">
-                    <AddToWishlistButton />
-                    <ProductsCartQuantity
-                      productQuantity={product.quantity}
-                      plusProductQuantity={() =>
-                        plusProductQuantity(product.id)
-                      }
-                      minusProductQuantity={() =>
-                        minusProductQuantity(product.id)
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
-            </Card>
-          );
-        })}
+            );
+          })}
       </div>
     </>
   );
