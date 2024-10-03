@@ -14,7 +14,6 @@ A web application that consumes the [Fake Store API](https://fakestoreapi.com).
 ## Possibly Future Development
 
 - Improve related product algorithm
-- User profile
 - Signup
 - Wishlist
 - Add and Remove product to cart
