@@ -1,17 +1,13 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 // Zod Object Schema
 export const SignInSchema = z.object({
-  username: z
-    .string()
-    .min(3, 'Username should atleast contain 3 characters long'),
-  password: z
-    .string()
-    .min(6, 'Password should atleast contain 6 characters long'),
+  username: z.string().min(3, "Username should atleast contain 3 characters long"),
+  password: z.string().min(6, "Password should atleast contain 6 characters long"),
 });
 
 export type TSignInSchema = z.infer<typeof SignInSchema>;
-export type TAuthStatus = 'authenticated' | 'unauthenticated';
+export type TAuthStatus = "authenticated" | "unauthenticated";
 
 // User Session
 export type UserSession = {
@@ -33,7 +29,7 @@ export type Product = {
   };
 };
 
-export type ProductStatus = "REST" | "SELECT" | "CHECKOUT"
+export type ProductStatus = "REST" | "SELECT" | "CHECKOUT";
 
 export interface ProductsInCart extends Product {
   quantity: number;
@@ -60,30 +56,34 @@ export type TCartSummary = {
 // Bussiness Services Requirement
 
 // User Details
+export type Name = {
+  firstname: string;
+  lastname: string;
+}
+
+export type Address = {
+  city: string;
+  street: string;
+  number: number;
+  zipcode: string;
+  geolocation: {
+    lat: string;
+    long: string;
+  };
+};
+
 export type User = {
   id: number;
   email: string;
   username: string;
   password: string;
-  name: {
-    firstname: string;
-    lastname: string;
-  };
-  address: {
-    city: string;
-    street: string;
-    number: number;
-    zipcode: string;
-    geolocation: {
-      lat: string;
-      long: string;
-    };
-  };
+  name: Name;
+  address: Address;
   phone: string;
 };
 
 // Add Ons Utility
 export type TShowNotyf = {
-  type: 'success' | 'error';
+  type: "success" | "error";
   message: string;
 };
