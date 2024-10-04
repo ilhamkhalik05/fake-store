@@ -13,6 +13,7 @@ A web application that consumes the [Fake Store API](https://fakestoreapi.com).
 
 ## Possibly Future Development
 
+- Search single product
 - Improve related product algorithm
 - Signup
 - Wishlist
