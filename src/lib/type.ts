@@ -90,9 +90,3 @@ export type User = {
   address: Address;
   phone: string;
 };
-
-// Add Ons Utility
-export type TShowNotyf = {
-  type: "success" | "error";
-  message: string;
-};
