@@ -1,5 +1,6 @@
+import { Category } from "@/lib/type";
 import { getProductById } from "./getProductById";
-import { type Category, getProductsByCategory } from "./getProductsByCategory";
+import { getProductsByCategory } from "./getProductsByCategory";
 
 export const getRelatedProducts = async (id: number) => {
   try {

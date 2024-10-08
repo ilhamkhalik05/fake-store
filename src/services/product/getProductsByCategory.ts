@@ -1,15 +1,6 @@
-import type { Product } from '@/lib/type';
+import type { Category, Product } from '@/lib/type';
 import { API_BASE_URL } from '@/lib/api';
 import { handleApiError } from '@/lib/utils';
-
-const categories = {
-  electronics: 'electronics',
-  jewelery: 'jewelery',
-  "men's clothing": "men's%20clothing",
-  "women's clothing": "women's%20clothing",
-} as const;
-
-export type Category = keyof typeof categories;
 
 export const getProductsByCategory = async ({
   category,

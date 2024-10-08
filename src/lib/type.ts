@@ -16,12 +16,21 @@ export type UserSession = {
 };
 
 // Bussiness Services Requirement
+const categories = {
+  electronics: 'electronics',
+  jewelery: 'jewelery',
+  "men's clothing": "men's%20clothing",
+  "women's clothing": "women's%20clothing",
+} as const;
+
+export type Category = keyof typeof categories;
+
 export type Product = {
   id: number;
   title: string;
   price: number;
   description: string;
-  category: string;
+  category: Category;
   image: string;
   rating: {
     rate: number;
