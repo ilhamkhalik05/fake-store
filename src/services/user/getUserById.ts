@@ -1,6 +1,5 @@
-import { API_BASE_URL } from "@/lib/api";
+import { API_BASE_URL, handleApiError } from "@/lib/api";
 import { User } from "@/lib/type";
-import { handleApiError } from "@/lib/utils";
 
 export const getUserById = async (id: number): Promise<User | null> => {
   try {

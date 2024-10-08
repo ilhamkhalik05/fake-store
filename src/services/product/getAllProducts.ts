@@ -1,6 +1,5 @@
 import type { Product } from '@/lib/type';
-import { API_BASE_URL } from '@/lib/api';
-import { handleApiError } from '@/lib/utils';
+import { API_BASE_URL, handleApiError } from '@/lib/api';
 
 type TGetAllProducts = {
   limit?: number;

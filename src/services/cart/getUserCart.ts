@@ -1,6 +1,5 @@
-import { API_BASE_URL } from '@/lib/api';
+import { API_BASE_URL, handleApiError } from '@/lib/api';
 import { ResponseCart } from '@/lib/type';
-import { handleApiError } from '@/lib/utils';
 
 export const getUserCart = async (
   userId: number,
