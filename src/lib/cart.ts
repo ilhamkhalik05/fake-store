@@ -13,11 +13,17 @@ type onUnSelectProductProps = {
   unselectAll: boolean;
 };
 
+export function getTotalQuantity(products: ProductsInCart[]) {
+  const selectedProducts = products.filter((product) => product.status === "SELECT");
+  const totalQuantity = selectedProducts.reduce((sum, product) => sum + product.quantity, 0);
+  return totalQuantity;
+}
+
 export function onPlusProductQuantity(products: ProductsInCart[], productId: number) {
   return products?.map((product) => {
     // -- Check if product is the same and make sure the quantities are between 0 and 20 --
     return product.id === productId && product.quantity > 0 && product.quantity < 20
-      ? { ...product, quantity: product.quantity + 1 }
+      ? ({ ...product, quantity: product.quantity + 1 } as ProductsInCart)
       : product;
   });
 }
@@ -25,7 +31,9 @@ export function onPlusProductQuantity(products: ProductsInCart[], productId: num
 export function onMinusProductQuantity(products: ProductsInCart[], productId: number) {
   return products?.map((product) => {
     // -- Check if product is the same and make sure the quantity is greater than 1 (can't be 0) --
-    return product.id === productId && product.quantity > 1 ? { ...product, quantity: product.quantity - 1 } : product;
+    return product.id === productId && product.quantity > 1
+      ? ({ ...product, quantity: product.quantity - 1 } as ProductsInCart)
+      : product;
   });
 }
 
@@ -35,11 +43,11 @@ export function onSelectProduct({ products, productId, productQuantity, selectAl
       // -- Check if product is the same and make sure the quantities are between 0 and 20 --
       return product.id === productId && product.quantity > 0 && product.quantity < 20
         ? // Select single product by change the quantity and status to SELECT
-          {
+          ({
             ...product,
             quantity: productQuantity,
             status: "SELECT",
-          }
+          } as ProductsInCart)
         : product;
     }
 
@@ -48,7 +56,7 @@ export function onSelectProduct({ products, productId, productQuantity, selectAl
       return {
         ...product,
         status: "SELECT",
-      };
+      } as ProductsInCart;
     }
 
     return product;
@@ -61,10 +69,10 @@ export function onUnSelectProduct({ products, productId, unselectAll }: onUnSele
       // -- Check if product is the same and make sure the quantity is greater than 0 --
       return product.id === productId && product.quantity > 0
         ? // Unselect single product by change the status to REST
-          {
+          ({
             ...product,
             status: "REST",
-          }
+          } as ProductsInCart)
         : product;
     }
 
@@ -73,7 +81,7 @@ export function onUnSelectProduct({ products, productId, unselectAll }: onUnSele
       return {
         ...product,
         status: "REST",
-      };
+      } as ProductsInCart;
     }
 
     return product;
