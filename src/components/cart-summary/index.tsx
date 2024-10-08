@@ -4,14 +4,14 @@ import type { TCartSummary } from "@/lib/type";
 import { Button } from "../@shadcn-ui/button";
 import { Card } from "../@shadcn-ui/card";
 import { Checkbox } from "../@shadcn-ui/checkbox";
-import { getTotalQuantity } from "@/lib/utils";
+import { getTotalQuantity } from "@/lib/cart";
 import { showUnavailableFeatureNotification } from "@/lib/notyf";
 import Link from "next/link";
 
 export default function CartSummary({ cartSummary }: { cartSummary: TCartSummary }) {
   if (cartSummary) {
     const { products, totalPrice } = cartSummary;
-    const productsSelectedLength = getTotalQuantity(products);
+    const totalQuantity = getTotalQuantity(products);
 
     return (
       <Card className="px-5 pt-3 pb-10">
@@ -36,7 +36,7 @@ export default function CartSummary({ cartSummary }: { cartSummary: TCartSummary
         </div>
 
         <Button className="w-full" onClick={() => showUnavailableFeatureNotification()}>
-          Checkout ({productsSelectedLength})
+          Checkout ({totalQuantity})
         </Button>
       </Card>
     );
