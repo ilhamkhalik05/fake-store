@@ -1,6 +1,6 @@
-import { Addons } from './Addons';
-import { Brand } from './Brand';
-import { NavMenu } from './NavMenu';
+import { Addons } from "./Addons";
+import { Brand } from "../utils/Brand";
+import { NavMenu } from "./NavMenu";
 
 export default function Navbar() {
   return (

@@ -40,7 +40,7 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5.5.0"
   },
-    "prettier": {
-      "printWidth": 120
-    }
+  "prettier": {
+    "printWidth": 120
+  }
 }

@@ -6,13 +6,14 @@ A web application that consumes the [Fake Store API](https://fakestoreapi.com).
 
 - Show all products
 - Show single product details
-- Show related product algorithm
+- Show related product
 - Browse products by category
 - Authentication with NextAuth (signin, signout, middleware)
 - Cart functionality (change quantity, select products)
 
 ## Possibly Future Development
 
+- OAuth
 - Search single product
 - Improve related product algorithm
 - Signup
